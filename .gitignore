@@ -19,3 +19,10 @@
 *.exe
 *.out
 *.app
+testing/Debug/
+testing/Release/
+data_set/1987.csv
+thETL/Debug/
+thETL/Release/
+thETL.opensdf
+thETL.sdf
