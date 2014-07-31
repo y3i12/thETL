@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\SerializationBase">
+      <UniqueIdentifier>{71fb5d6a-dd09-4b4b-b574-a274f2e30498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{6ea4872f-d653-4b99-b32e-f688b3898e12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FileSerialization">
+      <UniqueIdentifier>{feb99d8c-526d-46cb-851b-e20f72288a96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FileSerialization">
+      <UniqueIdentifier>{d4539d03-fa06-47ee-8538-8a766daea62e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{81a2d0cb-0185-45e6-896a-8270db92a3d6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RecordDescription.h">
+      <Filter>Header Files\SerializationBase</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordData.h">
+      <Filter>Header Files\SerializationBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DataField.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="CSVFileIO.h">
+      <Filter>Header Files\FileSerialization</Filter>
+    </ClInclude>
+    <ClInclude Include="fioInterface.h">
+      <Filter>Header Files\FileSerialization</Filter>
+    </ClInclude>
+    <ClInclude Include="dfsInterface.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="dioInterface.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="fioRecordStateMachine.h">
+      <Filter>Header Files\FileSerialization</Filter>
+    </ClInclude>
+    <ClInclude Include="fioRecordIdentification.h">
+      <Filter>Header Files\FileSerialization</Filter>
+    </ClInclude>
+    <ClInclude Include="dfsFStream.h">
+      <Filter>Header Files\FileSerialization</Filter>
+    </ClInclude>
+    <ClInclude Include="strptime.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="fioInterface.cpp">
+      <Filter>Source Files\FileSerialization</Filter>
+    </ClCompile>
+    <ClCompile Include="CSVFileIO.cpp">
+      <Filter>Source Files\FileSerialization</Filter>
+    </ClCompile>
+    <ClCompile Include="dfsFStream.cpp">
+      <Filter>Source Files\FileSerialization</Filter>
+    </ClCompile>
+    <ClCompile Include="strptime.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="DataField.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
