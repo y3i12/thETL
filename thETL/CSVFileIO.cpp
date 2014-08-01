@@ -50,5 +50,9 @@ bool CSVFileIO::serialize( const RecordData& theInput )
 			return false;
 		}
 	}
+	
+	m_fileStream.seekp( -1, std::ios_base::cur );
+	m_fileStream << std::endl;
+
 	return true;
 }

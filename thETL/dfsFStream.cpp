@@ -20,21 +20,38 @@ bool dfsFStream::deserialize( DataField& theOutput, void* theInput, char theDeli
 	{
 	case DataField::Time:
 	{
-		tm timeStruct;
-		strptime( str.c_str( ), format( ).c_str( ), &timeStruct );
-		theOutput = boost::posix_time::from_time_t( mktime( &timeStruct ) );
+		if ( !format( ).empty( ) )
+		{
+			tm timeStruct;
+			strptime( str.c_str( ), format( ).c_str( ), &timeStruct );
+			theOutput = boost::posix_time::from_time_t( mktime( &timeStruct ) );
+		}
 		break;
 	}
 	case DataField::Integer:
 	{
 		// TODO: sscanf to parse complex formats
-		theOutput = atoll( str.c_str( ) );
+		if ( !format( ).empty( ) )
+		{
+			theOutput = atoll( str.c_str( ) );
+		}
+		else
+		{
+			theOutput = atoll( str.c_str( ) );
+		}
 		break;
 	}
 	case DataField::Float:
 	{
 		// TODO: sscanf to parse complex formats
-		theOutput = atof( str.c_str( ) );
+		if ( !format( ).empty( ) )
+		{
+			theOutput = atof( str.c_str( ) );
+		}
+		else
+		{
+			theOutput = atof( str.c_str( ) );
+		}
 		break;
 	}
 	case DataField::String:
@@ -53,14 +70,45 @@ bool dfsFStream::deserialize( DataField& theOutput, void* theInput, char theDeli
 
 bool dfsFStream::serialize( void* theOutput, const DataField& theInput, char theDelimiter )
 {
+	std::fstream& output = *static_cast< std::fstream* >( theOutput );
+
 	switch ( m_type )
 	{
-	case DataField::Time: 		throw NotImplemented( "dfsFStream", "serialize Time" );
-	case DataField::Integer:	throw NotImplemented( "dfsFStream", "serialize Integer" );
-	case DataField::Float:		throw NotImplemented( "dfsFStream", "serialize Float" );
-	case DataField::String:		throw NotImplemented( "dfsFStream", "serialize String" );
-	case DataField::Blank:		throw NotImplemented( "dfsFStream", "serialize Blank" );
+	case DataField::Time:
+	{
+		throw NotImplemented( "dfsFStream", "serialize Time" );
 	}
+	case DataField::Integer:
+	{
+		// TODO: sprintf to print complex formats
+		if ( !format( ).empty( ) )
+		{
+			output << theInput.value();
+		}
+		else
+		{
+			output << theInput.value( );
+		}
+	}
+	case DataField::Float:
+	{
+		// TODO: sprintf to print complex formats
+		if ( !format( ).empty( ) )
+		{
+			output << theInput.value( );
+		}
+		else
+		{
+			output << theInput.value( );
+		}
+	}
+	case DataField::String:
+	{
+		output << theInput.value( );
+	}
+	case DataField::Blank:		break;
+	}
+	output << theDelimiter;
 	return true;
 }
 
