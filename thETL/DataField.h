@@ -33,13 +33,13 @@ namespace thetl
 		operator DataFieldValue&( void );
 		operator const DataFieldValue&( void ) const;
 
-		DataFieldValue& operator=( const DataFieldValue& theValue );
+		DataField& operator=( const DataFieldValue& theValue );
 
-		DataFieldValue& operator=( boost::posix_time::ptime& theValue );
-		DataFieldValue& operator=( long long theValue );
-		DataFieldValue& operator=( double theValue );
-		DataFieldValue& operator=( const std::string& theValue );
-		DataFieldValue& operator=( boost::blank theValue );
+		DataField& operator=( boost::posix_time::ptime& theValue );
+		DataField& operator=( long long theValue );
+		DataField& operator=( double theValue );
+		DataField& operator=( const std::string& theValue );
+		DataField& operator=( boost::blank theValue );
 
 	protected:
 		DataFieldValue m_value;

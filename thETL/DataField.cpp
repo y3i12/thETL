@@ -38,32 +38,39 @@ DataField::operator const DataFieldValue&( void ) const
 	return m_value;
 }
 
-DataFieldValue& DataField::operator=( const DataFieldValue& theValue )
+DataField& DataField::operator=( const DataFieldValue& theValue )
 {
 	m_value = theValue;
+	return *this;
+
 }
 
-DataFieldValue& DataField::operator=( boost::posix_time::ptime& theValue )
+DataField& DataField::operator=( boost::posix_time::ptime& theValue )
 {
 	m_value = theValue;
+	return *this;
 }
 
-DataFieldValue& DataField::operator=( long long theValue )
+DataField& DataField::operator=( long long theValue )
 {
 	m_value = theValue;
+	return *this;
 }
 
-DataFieldValue& DataField::operator=( double theValue )
+DataField& DataField::operator=( double theValue )
 {
 	m_value = theValue;
+	return *this;
 }
 
-DataFieldValue& DataField::operator=( const std::string& theValue )
+DataField& DataField::operator=( const std::string& theValue )
 {
 	m_value = theValue;
+	return *this;
 }
 
-DataFieldValue& DataField::operator=( boost::blank theValue )
+DataField& DataField::operator=( boost::blank theValue )
 {
 	m_value = theValue;
+	return *this;
 }
