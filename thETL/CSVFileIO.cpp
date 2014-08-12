@@ -28,12 +28,22 @@ bool CSVFileIO::deserialize( RecordData& theOutput )
 	theOutput.resize( m_recordDescription->size( ) );
 	size_t i = 0;
 
-	for ( auto& aDataField : *m_recordDescription )
+	size_t sz = m_recordDescription->size( );
+	size_t theLastFieldIndex = sz - 1;
+
+	for ( ; i < sz; ++i )
 	{
-		if ( !aDataField->deserialize( theOutput[ i++ ], &m_fileStream, m_delimiter ) )
+		dfsInterface* aDataField = ( *m_recordDescription )[ i ];
+
+		if ( !aDataField->deserialize( theOutput[ i ], &m_fileStream, theLastFieldIndex != i ? m_delimiter : '\n' ) )
 		{
 			return false;
 		}
+	}
+
+	for ( auto& aDataField : *m_recordDescription )
+	{
+		
 	}
 
 	return true;
@@ -42,16 +52,24 @@ bool CSVFileIO::deserialize( RecordData& theOutput )
 bool CSVFileIO::serialize( const RecordData& theInput )
 {
 	size_t i = 0;
+	size_t sz = m_recordDescription->size( );
+	size_t theLastFieldIndex = sz - 1;
 
-	for ( auto& aDataField : *m_recordDescription )
+	for ( ; i < sz; ++i )
 	{
-		if ( !aDataField->serialize( &m_fileStream, theInput[ i++ ], m_delimiter ) )
+		dfsInterface* aDataField = ( *m_recordDescription )[ i ];
+
+		if ( !aDataField->serialize( &m_fileStream, theInput[ i ], m_delimiter ) )
 		{
 			return false;
 		}
+
+		if ( theLastFieldIndex != i )
+		{
+			m_fileStream << m_delimiter;
+		}
 	}
 	
-	m_fileStream.seekp( -1, std::ios_base::cur );
 	m_fileStream << std::endl;
 
 	return true;

@@ -19,7 +19,7 @@ namespace thetl
 		};
 
 	public:
-		virtual ~dioInterface( void ) {}
+		virtual			~dioInterface( void ) {}
 
 		void            sourceString( const char* theSourceString ) { m_sourceString = theSourceString;	}
 		const char*     sourceString( void ) const                  { return m_sourceString.c_str( );   }

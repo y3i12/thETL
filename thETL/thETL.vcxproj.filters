@@ -28,6 +28,18 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{81a2d0cb-0185-45e6-896a-8270db92a3d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Third Party">
+      <UniqueIdentifier>{50097254-8bd6-46ac-90a5-9de651fb4aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Third Party\UNQLite">
+      <UniqueIdentifier>{17676d4f-1c4b-4a7b-9364-5b826b2d5c76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\KeyValueSerialization">
+      <UniqueIdentifier>{bdb2c6ff-d5f5-4674-8358-495e5e4fa180}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KeyValueSerialization">
+      <UniqueIdentifier>{696eb18b-de0b-437b-9778-4ce18d3ddd2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RecordDescription.h">
@@ -66,6 +78,15 @@
     <ClInclude Include="strptime.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="third_party\unqlite\unqlite.h">
+      <Filter>Third Party\UNQLite</Filter>
+    </ClInclude>
+    <ClInclude Include="kvioInterface.h">
+      <Filter>Header Files\KeyValueSerialization</Filter>
+    </ClInclude>
+    <ClInclude Include="MapKeyValueIO.h">
+      <Filter>Header Files\KeyValueSerialization</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fioInterface.cpp">
@@ -82,6 +103,12 @@
     </ClCompile>
     <ClCompile Include="DataField.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\unqlite\unqlite.cpp">
+      <Filter>Third Party\UNQLite</Filter>
+    </ClCompile>
+    <ClCompile Include="kvioInterface.cpp">
+      <Filter>Source Files\KeyValueSerialization</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

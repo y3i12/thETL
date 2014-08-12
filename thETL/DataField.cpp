@@ -3,7 +3,44 @@
 
 using namespace thetl;
 
-DataField::DataField( void )
+DataField::DataField( const DataFieldValue& theValue ) :
+	m_value( theValue )
+{
+
+}
+
+DataField::DataField( boost::posix_time::ptime& theValue ) :
+	m_value( theValue )
+{
+
+}
+
+DataField::DataField( long long theValue ) :
+	m_value( theValue )
+{
+
+}
+
+DataField::DataField( double theValue ) :
+	m_value( theValue )
+{
+
+}
+
+DataField::DataField( const std::string& theValue ) :
+	m_value( theValue )
+{
+
+}
+
+DataField::DataField( const char* theValue ) :
+	m_value( std::string( theValue ) )
+{
+
+}
+
+DataField::DataField( void ) :
+	m_value( boost::blank() )
 {
 
 }
@@ -45,7 +82,7 @@ DataField& DataField::operator=( const DataFieldValue& theValue )
 
 }
 
-DataField& DataField::operator=( boost::posix_time::ptime& theValue )
+DataField& DataField::operator=( const boost::posix_time::ptime& theValue )
 {
 	m_value = theValue;
 	return *this;
@@ -73,4 +110,44 @@ DataField& DataField::operator=( boost::blank theValue )
 {
 	m_value = theValue;
 	return *this;
+}
+
+bool DataField::operator==( const DataFieldValue& theValue ) const
+{
+	return m_value == theValue;
+}
+
+bool DataField::operator==( const boost::posix_time::ptime& theValue ) const
+{
+	return boost::get< boost::posix_time::ptime >( m_value ) == theValue;
+}
+
+bool DataField::operator==( long long theValue ) const
+{
+	return boost::get< long long >( m_value ) == theValue;
+}
+
+bool DataField::operator==( double theValue ) const
+{
+	return boost::get< double >( m_value ) == theValue;
+}
+
+bool DataField::operator==( const std::string& theValue ) const
+{
+	return boost::get< std::string >( m_value ) == theValue;
+}
+
+bool DataField::operator==( boost::blank theValue ) const
+{
+	return boost::get< boost::blank >( m_value ) == theValue;
+}
+
+bool DataField::operator<( const DataField& theValue )
+{
+	return m_value < theValue.m_value;
+}
+
+bool DataField::operator<( const DataField& theValue ) const
+{
+	return m_value < theValue.m_value;
 }

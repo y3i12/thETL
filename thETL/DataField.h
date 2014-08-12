@@ -23,6 +23,13 @@ namespace thetl
 		};
 
 	public:
+
+		DataField( const DataFieldValue& theValue );
+		explicit DataField( boost::posix_time::ptime& theValue );
+		DataField( long long theValue );
+		DataField( double theValue );
+		DataField( const std::string& theValue );
+		DataField( const char* theValue );
 		DataField( void );
 		virtual ~DataField( void );
 
@@ -33,13 +40,22 @@ namespace thetl
 		operator DataFieldValue&( void );
 		operator const DataFieldValue&( void ) const;
 
-		DataField& operator=( const DataFieldValue& theValue );
+		DataField&	operator=( const DataFieldValue& theValue );
+		DataField&	operator=( const boost::posix_time::ptime& theValue );
+		DataField&	operator=( long long theValue );
+		DataField&	operator=( double theValue );
+		DataField&	operator=( const std::string& theValue );
+		DataField&	operator=( boost::blank theValue );
 
-		DataField& operator=( boost::posix_time::ptime& theValue );
-		DataField& operator=( long long theValue );
-		DataField& operator=( double theValue );
-		DataField& operator=( const std::string& theValue );
-		DataField& operator=( boost::blank theValue );
+		bool		operator==( const DataFieldValue& theValue ) const;
+		bool		operator==( const boost::posix_time::ptime& theValue ) const;
+		bool		operator==( long long theValue ) const;
+		bool		operator==( double theValue ) const;
+		bool		operator==( const std::string& theValue ) const;
+		bool		operator==( boost::blank theValue ) const;
+
+		bool		operator<( const DataField& theValue );
+		bool		operator<( const DataField& theValue ) const;
 
 	protected:
 		DataFieldValue m_value;

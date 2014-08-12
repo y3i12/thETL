@@ -89,6 +89,7 @@ bool dfsFStream::serialize( void* theOutput, const DataField& theInput, char the
 		{
 			output << theInput.value( );
 		}
+		break;
 	}
 	case DataField::Float:
 	{
@@ -101,14 +102,16 @@ bool dfsFStream::serialize( void* theOutput, const DataField& theInput, char the
 		{
 			output << theInput.value( );
 		}
+		break;
 	}
 	case DataField::String:
 	{
 		output << theInput.value( );
 	}
+	break;
 	case DataField::Blank:		break;
 	}
-	output << theDelimiter;
+
 	return true;
 }
 

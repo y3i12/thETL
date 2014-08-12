@@ -10,6 +10,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testing", "testing\testing.
 		{1EAEA7E9-9770-4758-B6CA-BFBE4405F936} = {1EAEA7E9-9770-4758-B6CA-BFBE4405F936}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "liblmdb", "liblmdb\liblmdb.vcxproj", "{CA22D15D-18D8-48AE-9252-5C52A70D6953}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -24,6 +26,10 @@ Global
 		{54A38DB1-903C-4A09-BF28-6EDB4233F3D1}.Debug|Win32.Build.0 = Debug|Win32
 		{54A38DB1-903C-4A09-BF28-6EDB4233F3D1}.Release|Win32.ActiveCfg = Release|Win32
 		{54A38DB1-903C-4A09-BF28-6EDB4233F3D1}.Release|Win32.Build.0 = Release|Win32
+		{CA22D15D-18D8-48AE-9252-5C52A70D6953}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CA22D15D-18D8-48AE-9252-5C52A70D6953}.Debug|Win32.Build.0 = Debug|Win32
+		{CA22D15D-18D8-48AE-9252-5C52A70D6953}.Release|Win32.ActiveCfg = Release|Win32
+		{CA22D15D-18D8-48AE-9252-5C52A70D6953}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
