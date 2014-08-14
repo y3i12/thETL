@@ -26,3 +26,7 @@ thETL/Debug/
 thETL/Release/
 thETL.opensdf
 thETL.sdf
+testing/data.mdb
+liblmdb/Debug/
+liblmdb/Release/
+data_set/SFO_LAS.csv

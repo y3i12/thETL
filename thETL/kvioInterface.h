@@ -33,6 +33,9 @@ namespace thetl
 		virtual void		resetEndCursor( void ) = 0;
 		virtual void		setEndCursor( const RecordData& theKey ) = 0;
 
+		virtual bool		eraseCurrent( void ) = 0;
+		virtual bool		erase( const RecordData& theKey ) = 0;
+
 		void				resetCursors( void );
 
 		kvioInterface::key	makeKey( const RecordData& theInput );

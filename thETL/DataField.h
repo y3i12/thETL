@@ -7,7 +7,6 @@
 
 namespace thetl
 {
-
 	typedef boost::variant< boost::posix_time::ptime, long long, double, std::string, boost::blank > DataFieldValue;
 
 	class DataField
@@ -62,7 +61,75 @@ namespace thetl
 
 	};
 
+	template < class T >
+	class writer_visitor : public boost::static_visitor<>
+	{
+	public:
+		writer_visitor( T& theStream ) : m_stream( theStream )
+		{
+		}
 
+		void operator()( boost::posix_time::ptime& theValue ) const
+		{
+			m_stream << theValue;
+		}
+
+		void operator()( long long& theValue ) const
+		{
+			m_stream << theValue;
+		}
+
+		void operator()( double& theValue ) const
+		{
+			m_stream << theValue;
+		}
+
+		void operator()( std::string& theValue ) const
+		{
+			m_stream << theValue;
+		}
+
+		void operator()( boost::blank& theValue ) const
+		{
+		}
+
+		mutable T& m_stream;
+	};
+
+	template < class T >
+	class reader_visitor : public boost::static_visitor<>
+	{
+	public:
+		reader_visitor( T& theStream ) : m_stream( theStream )
+		{
+		}
+
+		void operator()( boost::posix_time::ptime& theValue ) const
+		{
+			m_stream >> theValue;
+		}
+
+		void operator()( long long& theValue ) const
+		{
+			m_stream >> theValue;
+		}
+
+		void operator()( double& theValue ) const
+		{
+			m_stream >> theValue;
+		}
+
+		void operator()( std::string& theValue ) const
+		{
+			m_stream >> theValue;
+		}
+
+		void operator()( boost::blank& theValue ) const
+		{
+		}
+
+		mutable T& m_stream;
+	};
 }
 
 #endif

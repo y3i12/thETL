@@ -40,9 +40,8 @@ namespace thetl
 		virtual void		resetEndCursor( void );
 		virtual void		setEndCursor( const RecordData& theKey );
 
-
-
-	protected:
+		virtual bool		eraseCurrent( void );
+		virtual bool		erase( const RecordData& theKey );
 
 	protected:
 		db											m_db;
@@ -200,6 +199,33 @@ namespace thetl
 		m_end = m_db.upper_bound( theKey );
 	}
 
+	template < class T >
+	bool stdMap_KeyValueIO< T >::eraseCurrent( void )
+	{
+		if ( m_current == m_end )
+		{
+			return false;
+		}
+
+		iterator tempItr = m_current++;
+		delete tempItr->second;
+		m_db.erase( m_current );
+		return true;
+	}
+
+	template < class T >
+	bool stdMap_KeyValueIO< T >::erase( const RecordData& theKey )
+	{
+		iterator tempItr = m_db.find( theKey );
+		if ( tempItr == m_db.end( ) )
+		{
+			return false;
+		}
+
+		delete tempItr->second;
+		m_db.erase( m_current );
+		return true;
+	}
 
 	typedef stdMap_KeyValueIO < std::map< kvioInterface::key, kvioInterface::value > > MapKeyValueIO;
 	typedef stdMap_KeyValueIO < std::multimap< kvioInterface::key, kvioInterface::value > > MultiMapKeyValueIO;

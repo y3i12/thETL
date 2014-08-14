@@ -1,104 +1,87 @@
 #include "csv_test.h"
+#include "map_test.h"
 
-#include "MapKeyValueIO.h"
-
-#include "CSVFileIO.h"
-#include "dfsFStream.h"
-#include "RecordData.h"
-#include <chrono>
-
+#include <cstdlib>
+#include "lmdb.h"
+#include "BinaryStream.h"
 
 //#define TEST_CSV_IO
+//#define MAP_TEST_IO
+
 int main( int c, char** v )
 {
-	thetl::RecordDescription theRecordDescription;
-	thetl::CSVFileIO theCSVFileIO( std::ios_base::in, &theRecordDescription, ',', true );
-
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 00 - Year					1987
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 01 - Month					10
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 02 - DayofMonth				14
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 03 - DayOfWeek				3
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 04 - DepTime					741
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 05 - CRSDepTime				730
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 06 - ArrTime					912
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 07 - CRSArrTime				849
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 08 - UniqueCarrier			PS
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 09 - FlightNum				1451
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 10 - TailNum					NA
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 11 - ActualElapsedTime		91
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 12 - CRSElapsedTime			79
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 13 - AirTime					NA
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 14 - ArrDelay				23
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 15 - DepDelay				11
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 16 - Origin					SAN
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 17 - Dest					SFO
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 18 - Distance				447
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 19 - TaxiIn					NA
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 20 - TaxiOut					NA
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 21 - Cancelled				0
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 22 - CancellationCode		NA
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::Integer ) );	// 23 - Diverted				0
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 24 - CarrierDelay			NA
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 25 - WeatherDelay			NA
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 26 - NASDelay				NA
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 27 - SecurityDelay			NA
-	theRecordDescription.push_back( new thetl::dfsFStream( thetl::DataField::String  ) );	// 28 - LateAircraftDelay		NA
-
-	theCSVFileIO.sourceString( "../data_set/1987.csv" );
-	theCSVFileIO.open( );
-
-	thetl::RecordData theRecordData;
-	size_t n = 0;
-
-	// key: Origin, Dest
-	thetl::MultiMapKeyValueIO theKeyMapIO( { 16, 17 } );
-
-	std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now( );
-
-	while ( !theCSVFileIO.atEnd( ) )
-	{
-		theCSVFileIO.deserialize( theRecordData );
-		theKeyMapIO.serialize( theRecordData );
-
-		++n;
-		if ( !( n % 100000 ) )
-		{
-			std::cout << n << " lines extracted..." << std::endl;
-#if defined _DEBUG
-			break;
-#endif
-		}
-	}
-
-	std::chrono::duration< double > time_span = std::chrono::duration_cast< std::chrono::duration< double > >( std::chrono::high_resolution_clock::now( ) - t1 );
-
-	std::cout << "It took me " << time_span.count( ) << " seconds, total of " << ( static_cast< double >( n ) / time_span.count( ) ) << " lines/sec" << std::endl;
-
-	theCSVFileIO.close( );
-
-	std::cout << "Creating output flights from SFO to LAS" << std::endl;
-	theKeyMapIO.setCurrentCursor( thetl::RecordData( { "SFO", "LAS" } ) );
-	theKeyMapIO.setEndCursor( thetl::RecordData( { "SFO", "LAS" } ) );
+	int i = 1;
+	thetl::BinaryStream::buffer mem_buff;
+	thetl::BinaryStream bs( mem_buff );
 	
-	thetl::CSVFileIO SFO_LAS_output( std::ios_base::out, &theRecordDescription, ',', true );
+	thetl::RecordData record_a;
 
-	SFO_LAS_output.sourceString( "../data_set/SFO_LAS.csv" );
-	SFO_LAS_output.open( );
+	record_a.push_back( thetl::DataField( "string" ) );
+	record_a.push_back( thetl::DataField( 10ll ) );
+	record_a.push_back( thetl::DataField( 19.6 ) );
+
+	bs << record_a;
+
+	bs.rewind( );
+
+	thetl::RecordData record_b;
+	record_b.push_back( thetl::DataField( "" ) );
+	record_b.push_back( thetl::DataField( 0ll ) );
+	record_b.push_back( thetl::DataField( 0.0 ) );
+
+	bs >> record_b;
 	
-	n = 0;
-	while ( !theKeyMapIO.atEnd( ) )
-	{
-		++n;
-		theKeyMapIO.deserialize( theRecordData );
-		SFO_LAS_output.serialize( theRecordData );
-	}
+	std::cout << record_b << std::endl;
 
-	SFO_LAS_output.close( );
+	return 0;
+	MDB_env*									m_env;
+	MDB_dbi										m_db;
+	MDB_cursor*									m_current;
+	MDB_cursor*									m_end;
+	MDB_txn*									m_transaction;
+	mdb_env_create( &m_env );
+	mdb_env_open( m_env, ".", MDB_NOLOCK, 0 );
+	mdb_txn_begin( m_env, 0, 0, &m_transaction );
+	mdb_dbi_open( m_transaction, 0, MDB_CREATE | MDB_DUPSORT, &m_db );
 
-	std::cout << "Done the output of " << n << " lines ;-)" << std::endl;
-	system( "pause" );
+	long kv = 1;
+	MDB_val key;
+	key.mv_size = sizeof( long );
+	key.mv_data = ( void* )&kv;
+	
+	long vv = -1;
+	MDB_val val;
+	val.mv_size = sizeof( long );
+	val.mv_data = &vv;
+
+	mdb_put( m_transaction, m_db, &key, &val, 0 );
+
+	kv = 999;
+	vv = -999;
+	mdb_put( m_transaction, m_db, &key, &val, 0 );
+
+	kv = 3;
+	vv = -3;
+	mdb_put( m_transaction, m_db, &key, &val, 0 );
+
+	kv = 999;
+	mdb_get( m_transaction, m_db, &key, &val );
+
+	mdb_cursor_open( m_transaction, m_db, &m_current );
+	mdb_cursor_open( m_transaction, m_db, &m_end );
+
+	mdb_cursor_get( m_current, &key, &val, MDB_FIRST );
+
+	mdb_txn_commit( m_transaction );
+	mdb_dbi_close( m_env, m_db );
+
 #if defined TEST_CSV_IO
 	csv_test();
+	system( "pause" );
+#endif
+
+#if defined MAP_TEST_IO
+	map_test( );
 	system( "pause" );
 #endif
 	return 0;

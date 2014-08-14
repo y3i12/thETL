@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\SerializationBase">
-      <UniqueIdentifier>{71fb5d6a-dd09-4b4b-b574-a274f2e30498}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{6ea4872f-d653-4b99-b32e-f688b3898e12}</UniqueIdentifier>
     </Filter>
@@ -28,12 +25,6 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{81a2d0cb-0185-45e6-896a-8270db92a3d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Third Party">
-      <UniqueIdentifier>{50097254-8bd6-46ac-90a5-9de651fb4aa5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Third Party\UNQLite">
-      <UniqueIdentifier>{17676d4f-1c4b-4a7b-9364-5b826b2d5c76}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\KeyValueSerialization">
       <UniqueIdentifier>{bdb2c6ff-d5f5-4674-8358-495e5e4fa180}</UniqueIdentifier>
     </Filter>
@@ -42,12 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RecordDescription.h">
-      <Filter>Header Files\SerializationBase</Filter>
-    </ClInclude>
-    <ClInclude Include="RecordData.h">
-      <Filter>Header Files\SerializationBase</Filter>
-    </ClInclude>
     <ClInclude Include="Exceptions.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -78,14 +63,23 @@
     <ClInclude Include="strptime.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="third_party\unqlite\unqlite.h">
-      <Filter>Third Party\UNQLite</Filter>
-    </ClInclude>
     <ClInclude Include="kvioInterface.h">
       <Filter>Header Files\KeyValueSerialization</Filter>
     </ClInclude>
     <ClInclude Include="MapKeyValueIO.h">
       <Filter>Header Files\KeyValueSerialization</Filter>
+    </ClInclude>
+    <ClInclude Include="LMDBKeyValueIO.h">
+      <Filter>Header Files\KeyValueSerialization</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordData.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordDescription.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryStream.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -104,11 +98,17 @@
     <ClCompile Include="DataField.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="third_party\unqlite\unqlite.cpp">
-      <Filter>Third Party\UNQLite</Filter>
-    </ClCompile>
     <ClCompile Include="kvioInterface.cpp">
       <Filter>Source Files\KeyValueSerialization</Filter>
+    </ClCompile>
+    <ClCompile Include="LMDBKeyValueIO.cpp">
+      <Filter>Source Files\KeyValueSerialization</Filter>
+    </ClCompile>
+    <ClCompile Include="BinaryStream.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordData.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

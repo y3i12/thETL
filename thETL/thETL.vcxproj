@@ -55,8 +55,9 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\boost_1_55_0;$(ProjectDir)\third_party;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_SCL_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\boost_1_55_0;..\liblmdb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -71,9 +72,10 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\boost_1_55_0;$(ProjectDir)\third_party\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_SCL_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\boost_1_55_0;..\liblmdb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -83,6 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BinaryStream.h" />
     <ClInclude Include="CSVFileIO.h" />
     <ClInclude Include="DataField.h" />
     <ClInclude Include="dfsFStream.h" />
@@ -91,22 +94,24 @@
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="fioInterface.h" />
     <ClInclude Include="fioRecordStateMachine.h" />
+    <ClInclude Include="LMDBKeyValueIO.h" />
     <ClInclude Include="MapKeyValueIO.h" />
     <ClInclude Include="kvioInterface.h" />
     <ClInclude Include="RecordData.h" />
     <ClInclude Include="RecordDescription.h" />
     <ClInclude Include="fioRecordIdentification.h" />
     <ClInclude Include="strptime.h" />
-    <ClInclude Include="third_party\unqlite\unqlite.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BinaryStream.cpp" />
     <ClCompile Include="CSVFileIO.cpp" />
     <ClCompile Include="DataField.cpp" />
     <ClCompile Include="dfsFStream.cpp" />
     <ClCompile Include="fioInterface.cpp" />
     <ClCompile Include="kvioInterface.cpp" />
+    <ClCompile Include="LMDBKeyValueIO.cpp" />
+    <ClCompile Include="RecordData.cpp" />
     <ClCompile Include="strptime.cpp" />
-    <ClCompile Include="third_party\unqlite\unqlite.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
