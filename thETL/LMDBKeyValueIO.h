@@ -3,6 +3,7 @@
 
 #include "kvioInterface.h"
 #include "lmdb.h"
+#include "BinaryStream.h"
 
 namespace thetl
 {
@@ -43,6 +44,8 @@ namespace thetl
 		MDB_cursor*									m_current;
 		MDB_cursor*									m_end;
 		MDB_txn*									m_transaction;
+		BinaryStream::buffer						m_binaryBuffer;
+		BinaryStream								m_binaryStream;
 		bool										m_isMultimap;
 	};
 }

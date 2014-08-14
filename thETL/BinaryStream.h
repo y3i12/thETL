@@ -25,6 +25,9 @@ namespace thetl
 		operator char_type*( );
 		operator const char_type*( ) const;
 
+		char_type* data( size_type thePosition = 0 );
+		const char_type* data( size_type thePosition = 0 ) const;
+
 		template < class T >
 		BinaryStream& operator << ( const T& theValue )
 		{
@@ -51,6 +54,7 @@ namespace thetl
 		BinaryStream& operator >> ( boost::blank theValue );
 
 		void		rewind( );
+		size_type	position( );
 
 	private:
 		buffer&		m_container;

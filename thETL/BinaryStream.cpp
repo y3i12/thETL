@@ -56,6 +56,16 @@ BinaryStream::operator const BinaryStream::char_type*( ) const
 	return &m_container[ 0 ];
 }
 
+BinaryStream::char_type* BinaryStream::data( BinaryStream::size_type thePosition )
+{
+	return &m_container[ thePosition ];
+}
+
+const BinaryStream::char_type* BinaryStream::data( BinaryStream::size_type thePosition ) const
+{
+	return &m_container[ thePosition ];
+}
+
 BinaryStream& BinaryStream::operator << ( const RecordData& theValue )
 {
 	for ( auto& value : theValue )
@@ -113,4 +123,10 @@ BinaryStream& BinaryStream::operator >> ( boost::blank theValue )
 void BinaryStream::rewind( )
 {
 	m_position = 0;
+}
+
+
+BinaryStream::size_type BinaryStream::position( )
+{
+	return m_position;
 }
